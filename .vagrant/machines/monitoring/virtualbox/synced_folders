@@ -1,0 +1,1 @@
+{"rsync":{"/vagrant":{"type":"rsync","guestpath":"/vagrant","hostpath":"/home/bootcamp/Desktop/Homework/Final-task_Group 2","disabled":false,"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}}}

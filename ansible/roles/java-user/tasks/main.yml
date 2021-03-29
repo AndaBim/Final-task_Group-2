@@ -1,0 +1,35 @@
+---
+- name: Create java-user
+  user:
+    name: java-user
+    state: present
+    append: yes
+    groups: wheel
+
+- name: Create ssh directory
+  file:
+    path: /home/java-user/.ssh
+    state: directory
+    owner: java-user
+    group: java-user
+    mode: '0700'
+
+- name: Copy public key
+  copy:
+    src: ../java-user/files/id_rsa/java-user.pub
+    dest: /home/java-user/.ssh/
+    owner: java-user
+    group: java-user
+    mode: '0644'
+
+- name: Copy private key
+  copy:
+    src: ../java-user/files/id_rsa/java-user
+    dest: /home/java-user/.ssh
+      owner: java-user
+      group: java-user
+      mode: '0600'
+
+- name: Add key to ssh-agent
+  shell: eval "$(ssh-agent -s)" && ssh-add /home/java-user/.ssh/java-user
+  become_user: java-user

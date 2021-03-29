@@ -1,0 +1,6 @@
+- hosts: monitoring
+  become: true
+  roles:
+    - basic-install
+    - java-user
+    - compile-java

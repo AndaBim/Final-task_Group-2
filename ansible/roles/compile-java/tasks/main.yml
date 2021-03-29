@@ -1,0 +1,23 @@
+---
+- name: Clone a repository
+  git:
+    repo: git@github.com:AndaBim/Branching.git
+    dest: /home/java-user/compile-java/
+    accept_hostkey: yes
+    key_file: /home/java-user/.ssh/java-user
+
+  become_user: java-user
+
+- name: 'Compile app.java'
+  shell: javac /home/java-user/compile-java/src/com/company/Main.java
+  become_user: java-user
+
+- name: run Java programme
+  shell: java Main
+  become_user: java-user
+  register: out
+  args:
+    chdir: /home/java-user/compile-java/src/com/company
+
+- debug: var=out.stdout_lines
+
